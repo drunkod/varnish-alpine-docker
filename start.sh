@@ -1,6 +1,9 @@
 #!/bin/sh
 
 mkdir -p /var/lib/varnish/`hostname` && chown nobody /var/lib/varnish/`hostname`
-varnishd -s malloc,${VARNISH_MEMORY} -a :80 -b ${VARNISH_BACKEND_ADDRESS}:${VARNISH_BACKEND_PORT}
-sleep 1
-varnishlog
+varnishlog &
+if [ -z ${VARNISH_CONFIG} ]; then
+  varnishd -F -s ${VARNISH_CACHE} -a :80 -b ${VARNISH_BACKEND_ADDRESS}:${VARNISH_BACKEND_PORT}
+else
+  varnishd -F -f /etc/varnish/default.vcl -s ${VARNISH_CACHE} -a :80
+fi
