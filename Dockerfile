@@ -1,4 +1,4 @@
-FROM gliderlabs/alpine:3.3
+FROM alpine:edge
 MAINTAINER  Thiago Figueiro <thiagocsf@gmail.com>
 ENV REFRESHED_AT 2016-03-28
 ENV VARNISH_BACKEND_ADDRESS 192.168.1.65
