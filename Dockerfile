@@ -9,9 +9,7 @@ EXPOSE 80
 VOLUME [ "/etc/varnish", "/srv/varnish" ]
 
 RUN apk update && \
-    apk upgrade && \
     apk add varnish
 
 ADD start.sh /start.sh
-RUN chmod +x /start.sh
 CMD [ "/start.sh" ]
