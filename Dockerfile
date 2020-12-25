@@ -14,8 +14,6 @@ LABEL description="ZeroTier One as Docker Image"
 
 RUN apk add --update --no-cache libc6-compat libstdc++
 
-EXPOSE 9993/udp
-
 COPY --from=builder /src/zerotier-one /usr/sbin/
 RUN mkdir -p /var/lib/zerotier-one \
   && ln -s /usr/sbin/zerotier-one /usr/sbin/zerotier-idtool \
@@ -33,4 +31,4 @@ RUN apk update && \
 
 ADD start.sh /start.sh
 
-CMD [ "/start.sh && zerotier-one" ]
+CMD [ "zerotier-one && /start.sh" ]
