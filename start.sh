@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir -p /var/lib/varnish/`hostname` && chown nobody /var/lib/varnish/`hostname`
+zerotier-one && mkdir -p /var/lib/varnish/`hostname` && chown nobody /var/lib/varnish/`hostname`
 varnishlog &
 
 VARNISH_PARAMETERS="-a :80 -p vcc_allow_inline_c=on
