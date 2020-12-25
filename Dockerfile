@@ -8,14 +8,15 @@ RUN apk add --update alpine-sdk linux-headers \
   && cd /src \
   && make -f make-linux.mk
 
-FROM alpine:edge
-MAINTAINER  Senorsen <senorsen.zhang@gmail.com>
+
+FROM alpine:3.12
+LABEL version="1.6.2"
 
 ENV VARNISH_CACHE malloc,100M
 ENV VARNISH_CONFIG ""
 ENV VARNISH_BACKEND_ADDRESS 192.168.1.65
 ENV VARNISH_BACKEND_PORT 80
-EXPOSE 80 9993/udp
+EXPOSE 9993/udp 80
 VOLUME [ "/srv/varnish" ]
 
 
@@ -29,4 +30,4 @@ RUN apk update && \
     apk add varnish
 
 ADD start.sh /start.sh
-CMD [ "/start.sh && zerotier-one" ]
+CMD [ "/start.sh" ]
