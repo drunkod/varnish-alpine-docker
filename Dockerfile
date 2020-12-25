@@ -31,4 +31,4 @@ RUN apk update && \
 
 ADD start.sh /start.sh
 
-CMD [ "zerotier-one && /start.sh" ]
+CMD [ "/start.sh" ]
