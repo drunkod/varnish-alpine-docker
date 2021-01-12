@@ -1,4 +1,4 @@
-FROM zyclonite/zerotier-docker:latest
+FROM bltavares/zerotier:latest
 LABEL version="1.6.2"
 LABEL description="ZeroTier One + Varnish as Docker Image"
 ENV VARNISH_BACKEND_ADDRESS 192.168.1.65
