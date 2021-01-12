@@ -1,6 +1,7 @@
 #!/bin/sh
 
-zerotier-one && mkdir -p /var/lib/varnish/`hostname` && chown nobody /var/lib/varnish/`hostname`
+chmod 660 /var/lib/zerotier-one/authtoken.secret && chmod 660 /var/lib/zerotier-one/identity.secret && mkdir -p /var/lib/varnish/`hostname` && chown nobody /var/lib/varnish/`hostname`
+zerotier-one &
 varnishlog &
 
 VARNISH_PARAMETERS="-a :80 -p vcc_allow_inline_c=on
