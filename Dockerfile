@@ -8,13 +8,13 @@ RUN apk add --update alpine-sdk linux-headers \
   && cd /src \
   && make -f make-linux.mk
 
-FROM thiagofigueiro/varnish-alpine-docker:latest
+FROM alpine:3.12
 LABEL version="1.6.2"
 LABEL description="ZeroTier One + Varnish as Docker Image"
-
 ENV VARNISH_BACKEND_ADDRESS 192.168.1.65
 ENV VARNISH_MEMORY 100M
 ENV VARNISH_BACKEND_PORT 80
+EXPOSE 80
 
 RUN apk add --update --no-cache libc6-compat libstdc++
 
@@ -26,5 +26,12 @@ RUN mkdir -p /var/lib/zerotier-one \
   && ln -s /usr/sbin/zerotier-one /usr/sbin/zerotier-cli \
   && chmod 660 /var/lib/zerotier-one/authtoken.secret \
   && chmod 660 /var/lib/zerotier-one/identity.secret
+  
+RUN apk update && \
+    apk upgrade && \
+    apk add varnish
+ADD start.sh /start.sh  
 
 ENTRYPOINT ["zerotier-one"]
+
+CMD ["/start.sh"]
