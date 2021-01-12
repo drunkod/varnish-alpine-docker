@@ -30,8 +30,6 @@ RUN mkdir -p /var/lib/zerotier-one \
 RUN apk update && \
     apk upgrade && \
     apk add varnish
-ADD start.sh /start.sh  
-
-ENTRYPOINT ["zerotier-one"]
+ADD start.sh /start.sh
 
 CMD ["/start.sh"]
